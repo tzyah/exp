@@ -1,0 +1,29 @@
+WAHのテスト実装
+Word Align Hybrid
+
+Concise: Compressed 'n' Composable Integer Set 
+http://ricerca.mat.uniroma3.it/users/colanton/docs/concise.pdf
+こちらに出てくるWAHの図の通りに実装
+Conciseのほうが疎な集合の時に有利なので後で試す。
+
+TODO:
+  - 入力がソートされてる時にまとめてsetするインターフェース
+  - 基本的なビット演算 (and or xor notなど)
+  - skip領域の断片化防止
+
+動作チェック
+
+[tzyah@dev1]$ time ./make_random_list | head -100000 | sort > data.txt
+
+real    0m0.434s
+user    0m0.276s
+sys     0m0.120s
+[tzyah@dev1]$ time ./encode_wah < data.txt > a.wah
+
+real    0m16.944s
+user    0m16.937s
+sys     0m0.008s
+[tzyah@dev1]$ ./decode_wah < a.wah | diff data.txt -
+[tzyah@dev1]$
+
+問題なし。でもsetしか実装してないので遅い。
